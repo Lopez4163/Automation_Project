@@ -81,18 +81,24 @@ OpenClaw helps structure the automation pipeline so that scraping, processing, a
 
 ---
 
-## Ollama (Local AI Model)
+## Groq Cloud (AI Model)
 
-Ollama will run a local large language model used to analyze job descriptions.
+Groq Cloud will be used to access a cloud-hosted large language model for analyzing job descriptions.
 
-The AI model will be responsible for:
+The system will use models such as **Llama 3**, which are available through the Groq API. These models will analyze job descriptions and generate summaries, extract relevant skills, and determine the relevance of job listings.
+
+Using Groq Cloud provides several advantages:
+
+- Access to powerful AI models without requiring local GPU hardware  
+- Fast response times for AI inference  
+- A free developer tier that allows experimentation without requiring a credit card  
+
+The AI model will perform tasks such as:
 
 - Summarizing job descriptions  
-- Identifying required skills  
-- Determining relevance of listings  
-- Extracting important information  
-
-Running the AI locally reduces dependence on external APIs and allows faster processing.
+- Extracting required skills  
+- Identifying experience levels  
+- Determining the relevance of listings  
 
 ---
 
@@ -171,7 +177,7 @@ The system will operate through a structured automation pipeline.
 1. The automation script runs on a scheduled interval.  
 2. The scraper collects job listings from selected job boards.  
 3. HTML data is parsed and structured.  
-4. Job descriptions are sent to the AI model.  
+4. Job descriptions are sent to the Groq AI model.  
 5. The AI model generates summaries and extracts relevant information.  
 6. Listings are filtered based on relevance.  
 7. Formatted job alerts are sent through the Telegram bot.  
@@ -191,7 +197,7 @@ Web Scraper (BeautifulSoup)
 Data Extraction
    │
    ▼
-AI Processing (Ollama)
+AI Processing (Groq Cloud - Llama 3)
    │
    ▼
 Filtering + Summary Generation
@@ -209,7 +215,7 @@ User Notifications
 
 ### 1. Environment Setup
 - Install Python and required libraries.  
-- Install and configure Ollama.  
+- Create a Groq developer account and obtain an API key.  
 - Create a Telegram bot and obtain API credentials.
 
 ### 2. Web Scraper Development
@@ -221,8 +227,8 @@ User Notifications
 - Remove duplicate listings.
 
 ### 4. AI Integration
-- Send job descriptions to the Ollama model.  
-- Generate summaries and skill extraction.
+- Send job descriptions to the Groq API.  
+- Generate summaries and extract required skills.
 
 ### 5. Filtering Logic
 - Apply keyword filtering for relevant job types.  
