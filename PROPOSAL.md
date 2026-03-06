@@ -21,17 +21,17 @@ Each listing must then be manually reviewed to determine whether it matches the 
 
 This manual process presents several challenges:
 
-- **Time Consumption**  
-  Users must repeatedly check multiple websites every day.
+### Time Consumption
+Users must repeatedly check multiple websites every day.
 
-- **Missed Opportunities**  
-  Job postings appear and disappear quickly. If users are not checking frequently, they may miss relevant listings.
+### Missed Opportunities
+Job postings appear and disappear quickly. If users are not checking frequently, they may miss relevant listings.
 
-- **Information Overload**  
-  Many listings are irrelevant, forcing users to manually filter through large numbers of job postings.
+### Information Overload
+Many listings are irrelevant, forcing users to manually filter through large numbers of job postings.
 
-- **Inefficient Evaluation**  
-  Reading long job descriptions to determine required skills and qualifications takes additional time.
+### Inefficient Evaluation
+Reading long job descriptions to determine required skills and qualifications takes additional time.
 
 Because of these limitations, the job search process becomes inefficient and difficult to maintain consistently.
 
@@ -87,10 +87,10 @@ Ollama will run a local large language model used to analyze job descriptions.
 
 The AI model will be responsible for:
 
-- Summarizing job descriptions
-- Identifying required skills
-- Determining relevance of listings
-- Extracting important information
+- Summarizing job descriptions  
+- Identifying required skills  
+- Determining relevance of listings  
+- Extracting important information  
 
 Running the AI locally reduces dependence on external APIs and allows faster processing.
 
@@ -104,11 +104,11 @@ The Telegram Bot API allows applications to send messages directly to users thro
 
 Each notification will contain:
 
-- Job title
-- Company name
-- Short AI-generated summary
-- Key skills required
-- Link to the job posting
+- Job title  
+- Company name  
+- Short AI-generated summary  
+- Key skills required  
+- Link to the job posting  
 
 Telegram was chosen because it is lightweight, easy to integrate with Python, and allows users to receive real-time alerts on their phone.
 
@@ -118,7 +118,7 @@ Telegram was chosen because it is lightweight, easy to integrate with Python, an
 
 The main goal of this project is to reduce the manual effort required when searching for job opportunities.
 
-The automation is expected to provide several benefits:
+The automation is expected to provide several benefits.
 
 ---
 
@@ -138,11 +138,11 @@ The system will monitor job boards regularly, allowing it to detect new job list
 
 The AI model will analyze job descriptions and determine whether they match relevant keywords such as:
 
-- Internship
-- Entry-level
-- Remote
-- Full stack
-- Software engineer
+- Internship  
+- Entry-level  
+- Remote  
+- Full stack  
+- Software engineer  
 
 This will reduce the number of irrelevant listings sent to the user.
 
@@ -168,15 +168,191 @@ The system will operate through a structured automation pipeline.
 
 ## System Workflow
 
-1. The automation script runs on a scheduled interval.
-2. The scraper collects job listings from selected job boards.
-3. HTML data is parsed and structured.
-4. Job descriptions are sent to the AI model.
-5. The AI model generates summaries and extracts relevant information.
-6. Listings are filtered based on relevance.
-7. Formatted job alerts are sent through the Telegram bot.
+1. The automation script runs on a scheduled interval.  
+2. The scraper collects job listings from selected job boards.  
+3. HTML data is parsed and structured.  
+4. Job descriptions are sent to the AI model.  
+5. The AI model generates summaries and extracts relevant information.  
+6. Listings are filtered based on relevance.  
+7. Formatted job alerts are sent through the Telegram bot.  
 8. The user receives notifications on their device.
 
 ---
 
 ## Architecture Diagram
+
+```
+Job Boards
+   │
+   ▼
+Web Scraper (BeautifulSoup)
+   │
+   ▼
+Data Extraction
+   │
+   ▼
+AI Processing (Ollama)
+   │
+   ▼
+Filtering + Summary Generation
+   │
+   ▼
+Telegram Bot API
+   │
+   ▼
+User Notifications
+```
+
+---
+
+## Step-by-Step Development Plan
+
+### 1. Environment Setup
+- Install Python and required libraries.  
+- Install and configure Ollama.  
+- Create a Telegram bot and obtain API credentials.
+
+### 2. Web Scraper Development
+- Identify job board page structures.  
+- Build scripts to extract job information.
+
+### 3. Data Processing
+- Structure scraped data in JSON format.  
+- Remove duplicate listings.
+
+### 4. AI Integration
+- Send job descriptions to the Ollama model.  
+- Generate summaries and skill extraction.
+
+### 5. Filtering Logic
+- Apply keyword filtering for relevant job types.  
+- Remove irrelevant listings.
+
+### 6. Notification System
+- Format job alerts into readable messages.  
+- Send alerts using the Telegram Bot API.
+
+### 7. Automation Scheduling
+- Run scripts automatically using scheduled triggers or automation tools.
+
+---
+
+# 6. Risk Analysis and Mitigation Strategies
+
+---
+
+## Website Structure Changes
+
+Job board websites may update their HTML structure, which can break the scraper.
+
+**Mitigation Strategy**
+
+- Use flexible selectors.  
+- Update scraping logic if website structure changes.
+
+---
+
+## Rate Limiting or Blocking
+
+Some websites may block automated requests.
+
+**Mitigation Strategy**
+
+- Limit request frequency.  
+- Use polite scraping practices.
+
+---
+
+## AI Misinterpretation
+
+The AI model may incorrectly summarize or classify a job listing.
+
+**Mitigation Strategy**
+
+- Adjust prompts and filtering rules.  
+- Allow manual review of results.
+
+---
+
+## Duplicate Notifications
+
+The scraper may detect the same job listing multiple times.
+
+**Mitigation Strategy**
+
+- Track previously sent job links.  
+- Only notify users about new listings.
+
+---
+
+# 7. Testing Strategy
+
+The automation system will be tested in several stages.
+
+---
+
+## Unit Testing
+
+Individual components such as scraping functions and AI processing will be tested separately.
+
+---
+
+## Integration Testing
+
+All components will be connected and tested together to ensure the system works as expected.
+
+---
+
+## Real-World Testing
+
+The system will run continuously over several days to verify that:
+
+- Job listings are detected properly  
+- Notifications are sent correctly  
+- AI summaries are accurate  
+
+---
+
+# 8. Future Enhancements
+
+This project could be expanded with additional features.
+
+---
+
+## Support More Job Boards
+
+Additional sources such as LinkedIn, Indeed, and startup job boards could be added.
+
+---
+
+## Personalized Filtering
+
+Users could define preferred skills, job locations, salary ranges, or companies.
+
+---
+
+## Web Dashboard
+
+A dashboard could display collected job listings and allow manual filtering.
+
+---
+
+## Resume Matching
+
+The AI model could compare job requirements with the user's resume to generate a match score.
+
+---
+
+## Multiple Notification Channels
+
+Notifications could also be delivered via email, Slack, or a mobile application.
+
+---
+
+# 9. Conclusion
+
+This project demonstrates how automation and artificial intelligence can significantly improve the job search process.
+
+By automatically collecting job listings, analyzing them with AI, and delivering summarized alerts through Telegram, the system reduces repetitive manual work and helps users stay informed about relevant opportunities.
+
+The proposed system highlights how automation can increase efficiency, improve information filtering, and create a scalable platform that can be expanded into a more advanced job monitoring system in the future.
